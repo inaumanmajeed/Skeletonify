@@ -28,7 +28,10 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-      - run: npm run demo:build
+      - name: Build demo for custom domain
+        env:
+          VITE_BASE: /
+        run: npm run demo:build
 
       - uses: actions/configure-pages@v5
 

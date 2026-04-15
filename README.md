@@ -22,7 +22,7 @@ That's the whole API.
 [![SSR](https://img.shields.io/badge/SSR-safe-black)](#)
 [![Next.js](https://img.shields.io/badge/Next.js-ready-black)](#)
 
-**[Live Demo](https://inaumanmajeed.github.io/Skeletonify/)** · **[GitHub](https://github.com/inaumanmajeed/Skeletonify)** · **[Report a bug](https://github.com/inaumanmajeed/Skeletonify/issues)**
+**[Live Demo](https://skeletonify.nauman.live)** · **[GitHub](https://github.com/inaumanmajeed/Skeletonify)** · **[Report a bug](https://github.com/inaumanmajeed/Skeletonify/issues)**
 
 </div>
 
