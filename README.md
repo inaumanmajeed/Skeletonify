@@ -1,10 +1,10 @@
 <div align="center">
 
-# Skeletonify
+<h1>Skeletonify</h1>
 
-### Stop writing skeleton components. Wrap. Done.
+<h3>Stop writing skeleton components. Wrap. Done.</h3>
 
-**Zero-config React skeletons that match your UI — automatically.**
+<p><strong>Zero-config React skeletons that match your UI — automatically.</strong></p>
 
 ```jsx
 <Skeletonify loading={isLoading}>
@@ -97,7 +97,7 @@ function ProfileCard({ user }) {
   return (
     <div className="flex flex-col gap-4 p-6 w-96">
       <div className="flex gap-4 items-center">
-        <img src={user.avatar} className="w-16 h-16 rounded-full" />
+        <img src={user.avatar} alt="" className="w-16 h-16 rounded-full" />
         <div className="flex flex-col gap-2">
           <h2 className="text-xl">{user.name}</h2>
           <span className="text-sm">{user.title}</span>
@@ -298,6 +298,8 @@ If you hit one of these, `fallback` is always the escape hatch:
 
 ```jsx
 <Skeletonify loading={isLoading} fallback={<CustomSkeleton />}>
+  <Chart data={data} />
+</Skeletonify>
 ```
 
 ---
