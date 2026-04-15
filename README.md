@@ -15,8 +15,8 @@
 That's the whole API.
 
 [![CI](https://github.com/inaumanmajeed/Skeletonify/actions/workflows/ci.yml/badge.svg)](https://github.com/inaumanmajeed/Skeletonify/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/skeletonify?color=black&label=npm)](https://www.npmjs.com/package/skeletonify)
-[![size](https://img.shields.io/badge/gzipped-5KB-black)](https://bundlephobia.com/package/skeletonify)
+[![npm](https://img.shields.io/npm/v/@inaumanmajeed/skeletonify?color=black&label=npm)](https://www.npmjs.com/package/@inaumanmajeed/skeletonify)
+[![size](https://img.shields.io/badge/gzipped-5KB-black)](https://bundlephobia.com/package/@inaumanmajeed/skeletonify)
 [![tests](https://img.shields.io/badge/tests-34%20passing-brightgreen)](https://github.com/inaumanmajeed/Skeletonify/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-MIT-black)](./LICENSE)
 [![SSR](https://img.shields.io/badge/SSR-safe-black)](#)
@@ -51,7 +51,7 @@ This is the **twin component problem**, and every React app has it. You're maint
 Wrap the component. Skeletonify reads your JSX, infers the shape, and renders a matching skeleton while `loading` is `true`.
 
 ```jsx
-import { Skeletonify } from "skeletonify";
+import { Skeletonify } from "@inaumanmajeed/skeletonify";
 
 export function Profile({ user, isLoading }) {
   return (
@@ -73,15 +73,15 @@ Change your component tomorrow and the skeleton changes with it. Because it _is_
 ## Install
 
 ```bash
-npm install skeletonify
+npm install @inaumanmajeed/skeletonify
 ```
 
 ```bash
-pnpm add skeletonify
+pnpm add @inaumanmajeed/skeletonify
 ```
 
 ```bash
-yarn add skeletonify
+yarn add @inaumanmajeed/skeletonify
 ```
 
 No peer config. No Tailwind plugin. No provider at the root of your tree.
@@ -91,7 +91,7 @@ No peer config. No Tailwind plugin. No provider at the root of your tree.
 ## Usage
 
 ```jsx
-import { Skeletonify } from "skeletonify";
+import { Skeletonify } from "@inaumanmajeed/skeletonify";
 
 function ProfileCard({ user }) {
   return (
@@ -241,7 +241,7 @@ Set `learn={false}` to disable L2 for a specific wrapper. L1 still works as befo
 You can also clear the whole cache programmatically:
 
 ```ts
-import { clearSkeletonCache } from "skeletonify";
+import { clearSkeletonCache } from "@inaumanmajeed/skeletonify";
 clearSkeletonCache();
 ```
 
