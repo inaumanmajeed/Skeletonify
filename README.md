@@ -6,11 +6,15 @@
 
 <p><strong>Zero-config React skeletons that match your UI — automatically.</strong></p>
 
+</div>
+
 ```jsx
 <Skeletonify loading={isLoading}>
   <ProfileCard />
 </Skeletonify>
 ```
+
+<div align="center">
 
 That's the whole API.
 
