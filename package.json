@@ -1,7 +1,7 @@
 {
   "name": "skeletonify",
   "version": "0.2.0",
-  "description": "Zero-config React skeleton wrapper with L1 heuristic + L2 learning engine. Drop it in, get a plausible loading skeleton for any subtree — SSR-safe, zero flicker.",
+  "description": "Zero-config React skeleton wrapper with L1 heuristic + L2 learning engine. Drop it in, get a plausible loading skeleton for any subtree \u2014 SSR-safe, zero flicker.",
   "license": "MIT",
   "author": "inaumanmajeed",
   "repository": {
@@ -64,7 +64,9 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "dotenv": "^8.2.0",
     "happy-dom": "^15.0.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss": "^4.2.2",
@@ -74,6 +76,6 @@
     "vitest": "^2.0.0"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20.19.0"
   }
 }
