@@ -1,32 +1,86 @@
 name: Publish to npm
 
+# Fires on every merge to main. Each run:
+#   1. Runs typecheck + tests + build
+#   2. Bumps the patch version
+#   3. Publishes to npm with provenance
+#   4. Pushes the version-bump commit and tag back to main
+#
+# Loop prevention: the bump commit is authored with `[skip ci]` in its
+# subject, which GitHub Actions honors natively by skipping all workflows
+# for that push. The `if:` expression on the job is a second belt.
+
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
   workflow_dispatch:
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
 
 jobs:
   publish:
-    name: Build & Publish
+    name: Build, bump, publish
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (
+        !contains(github.event.head_commit.message, '[skip ci]') &&
+        !startsWith(github.event.head_commit.message, 'chore(release)')
+      )
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: '22.12.0'
           cache: npm
           registry-url: https://registry.npmjs.org
 
-      - run: npm ci
-      - run: npm run typecheck
-      - run: npm test
-      - run: npm run build
+      - name: Install
+        run: npm ci
 
-      - name: Publish
-        run: npm publish --provenance --access public
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build library
+        run: npm run build
+
+      - name: Configure git author
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Bump patch version
+        id: bump
+        run: |
+          NEW_VERSION=$(npm version patch -m "chore(release): %s [skip ci]")
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+          echo "Bumped to $NEW_VERSION"
+
+      - name: Publish to npm
+        run: npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push version bump and tag
+        run: git push origin HEAD:main --follow-tags
+
+      - name: Summary
+        run: |
+          echo "### Published ${{ steps.bump.outputs.version }} :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "[View on npm](https://www.npmjs.com/package/@inaumanmajeed/skeletonify)" >> $GITHUB_STEP_SUMMARY
