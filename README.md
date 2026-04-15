@@ -4,7 +4,7 @@
 
 <h3>Stop writing skeleton components. Wrap. Done.</h3>
 
-<p><strong>Zero-config React skeletons that match your UI — automatically.</strong></p>
+<p><strong>Zero-config React skeletons that match your UI automatically.</strong></p>
 
 </div>
 
@@ -40,9 +40,9 @@ Then `UserList`. Then `UserListSkeleton`.
 
 Then `Dashboard`. Then `DashboardSkeleton`.
 
-You tweak the real component — the skeleton rots.
-You rename a class — the skeleton drifts.
-You ship a redesign — half your skeletons are lying to your users.
+You tweak the real component the skeleton rots.
+You rename a class the skeleton drifts.
+You ship a redesign half your skeletons are lying to your users.
 
 This is the **twin component problem**, and every React app has it. You're maintaining two trees that say the same thing in two different languages, and one of them is always out of date.
 
@@ -68,7 +68,7 @@ export function Profile({ user, isLoading }) {
 
 No twin component. No config file. No plugin. No build step.
 
-When `loading` is `false`, your real component renders. When it's `true`, Skeletonify shows a shimmering placeholder that actually resembles your layout — avatar where the avatar is, text lines where the text is, buttons where the buttons are.
+When `loading` is `false`, your real component renders. When it's `true`, Skeletonify shows a shimmering placeholder that actually resembles your layout avatar where the avatar is, text lines where the text is, buttons where the buttons are.
 
 Change your component tomorrow and the skeleton changes with it. Because it _is_ your component, just drawn differently.
 
@@ -134,7 +134,7 @@ Need a manual override for a specific subtree? `fallback` lets you hand-craft it
 ## Features
 
 - **Zero config.** Install, wrap, ship.
-- **Zero flicker.** No hidden render, no DOM measurement, no swap. One commit — skeleton or real.
+- **Zero flicker.** No hidden render, no DOM measurement, no swap. One commit skeleton or real.
 - **SSR-safe.** Pure, deterministic inference. Works in Next.js App Router out of the box. No hydration mismatches.
 - **Tailwind-first.** Reads `w-*`, `h-*`, `rounded-full`, `flex`, `gap-*`, `text-*`, `aspect-*` and more.
 - **Tiny.** 5KB minified+gzipped. Zero runtime dependencies.
@@ -147,7 +147,7 @@ Need a manual override for a specific subtree? `fallback` lets you hand-craft it
 
 ## Before / After
 
-**Before Skeletonify** — loading state is a blank screen, a spinner, or a hand-written twin component that's three commits behind the real one:
+**Before Skeletonify** loading state is a blank screen, a spinner, or a hand-written twin component that's three commits behind the real one:
 
 ```
 ┌──────────────────────────────┐
@@ -159,7 +159,7 @@ Need a manual override for a specific subtree? `fallback` lets you hand-craft it
 └──────────────────────────────┘
 ```
 
-**After Skeletonify** — the skeleton mirrors your actual layout, derived from the same JSX the user will eventually see:
+**After Skeletonify** the skeleton mirrors your actual layout, derived from the same JSX the user will eventually see:
 
 ```
 ┌──────────────────────────────┐
@@ -207,7 +207,7 @@ Skeletonify ships with an optional learning cache that makes your skeletons **ge
 
 **Before L2 (heuristic only):** the skeleton is _plausibly_ shaped. Close, but not exact. Text lines might be the wrong length; padding might differ from your component by a few pixels.
 
-**After L2 (learned):** the skeleton matches your actual component pixel-for-pixel, because it _is_ your actual component — just serialized into a shimmer-safe descriptor. When you redesign the component, the first load re-learns and every load after that is accurate again.
+**After L2 (learned):** the skeleton matches your actual component pixel-for-pixel, because it _is_ your actual component just serialized into a shimmer-safe descriptor. When you redesign the component, the first load re-learns and every load after that is accurate again.
 
 ### Priority order
 
@@ -223,14 +223,14 @@ manual fallback  >  L2 learned cache  >  L1 heuristic
 
 Skeletonify builds a stable cache key in three tiers:
 
-1. **Explicit `id` prop** — most reliable, use this when you care:
+1. **Explicit `id` prop** most reliable, use this when you care:
    ```tsx
    <Skeletonify loading={loading} id="ProfileCard">
      <ProfileCard />
    </Skeletonify>
    ```
-2. **Component displayName / name** — inferred automatically from the first real component inside the wrapper.
-3. **Structural fingerprint** — hash of the L1 descriptor, as a last resort.
+2. **Component displayName / name** inferred automatically from the first real component inside the wrapper.
+3. **Structural fingerprint** hash of the L1 descriptor, as a last resort.
 
 ### Opting out
 
@@ -254,7 +254,7 @@ clearSkeletonCache();
 Skeletonify never touches the DOM on the _skeleton_ path. Learning happens on the _real UI_ path, after React commits, scheduled on `requestIdleCallback` so it never competes with user input:
 
 ```tsx
-// (simplified — this is what's happening under the hood)
+// (simplified this is what's happening under the hood)
 useEffect(() => {
   if (loading) return;
   const handle = requestIdleCallback(() => {
@@ -265,19 +265,19 @@ useEffect(() => {
 }, [loading, componentId]);
 ```
 
-The serializer walks the rendered subtree once (bounded depth, bounded children), reads `getBoundingClientRect` + `getComputedStyle` on each node, and emits a `Descriptor` in the exact same shape the L1 engine produces. That shared shape is why L2 can drop into the renderer without any code path changes — the rendering side of Skeletonify doesn't know or care which layer produced the descriptor.
+The serializer walks the rendered subtree once (bounded depth, bounded children), reads `getBoundingClientRect` + `getComputedStyle` on each node, and emits a `Descriptor` in the exact same shape the L1 engine produces. That shared shape is why L2 can drop into the renderer without any code path changes the rendering side of Skeletonify doesn't know or care which layer produced the descriptor.
 
 ### SSR & hydration safety
 
 - On the server, `globalThis.localStorage` doesn't exist → only L1 runs.
-- On the **first** client paint, L1 runs too — so the server and client emit byte-identical markup. No hydration warnings.
+- On the **first** client paint, L1 runs too so the server and client emit byte-identical markup. No hydration warnings.
 - Only after React has committed once does the L2 cache start being consulted for _new_ loading sessions.
 
-You get zero flicker, SSR-safe rendering, and progressively-sharper skeletons — all from the same `<Skeletonify>` wrapper you were already using.
+You get zero flicker, SSR-safe rendering, and progressively-sharper skeletons all from the same `<Skeletonify>` wrapper you were already using.
 
 ## How it works (30 seconds)
 
-Skeletonify walks the `children` React element tree — pure, synchronous, no DOM — and applies a small set of heuristics:
+Skeletonify walks the `children` React element tree pure, synchronous, no DOM and applies a small set of heuristics:
 
 - `<img>` or any `src` prop → image-shaped box
 - `rounded-full` + size → circle (avatars)
@@ -291,7 +291,7 @@ No measurement. No effects. No async. Server and client produce identical output
 
 ## Limitations
 
-Skeletonify is **heuristic, not pixel-perfect**. We think that's the right trade — you get 80% of the value for 0% of the effort. Be aware:
+Skeletonify is **heuristic, not pixel-perfect**. We think that's the right trade you get 80% of the value for 0% of the effort. Be aware:
 
 - **Best on Tailwind.** Without className hints, inference falls back to generic shapes. It still works; it just looks less specific.
 - **No DOM measurement.** We will never render your component invisibly to measure it. That means tall dynamic content is estimated, not measured. Use `fallback` for the few cases that need to be exact.
@@ -314,7 +314,7 @@ If you hit one of these, `fallback` is always the escape hatch:
 
 Every React team has tried to write beautiful, hand-crafted skeletons. Every React team has watched those skeletons rot.
 
-Skeletonify makes the easy case effortless and the hard case possible — in that order. If you want pixel-perfect, nothing beats hand-crafting with `fallback`. For everything else — the 90% of components you'll never lovingly maintain a twin for — Skeletonify gives you something that's good enough, automatically, forever.
+Skeletonify makes the easy case effortless and the hard case possible in that order. If you want pixel-perfect, nothing beats hand-crafting with `fallback`. For everything else the 90% of components you'll never lovingly maintain a twin for Skeletonify gives you something that's good enough, automatically, forever.
 
 The best skeleton is the one you don't have to write.
 
@@ -338,13 +338,13 @@ npm run build       # ESM + CJS + .d.ts
 npm run demo:dev    # open the interactive playground
 ```
 
-Open an issue before big changes so we can align on scope. Skeletonify is intentionally small — the bar for new features is "does it keep the zero-config promise?"
+Open an issue before big changes so we can align on scope. Skeletonify is intentionally small the bar for new features is "does it keep the zero-config promise?"
 
 ---
 
 ## License
 
-MIT — do whatever you want.
+MIT do whatever you want.
 
 <div align="center">
 
