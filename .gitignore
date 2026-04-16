@@ -5,8 +5,7 @@ coverage
 *.log
 *.tsbuildinfo
 .DS_Store
-.env
-.env.local
 .claude
 .vscode
 .idea
+config.bat
