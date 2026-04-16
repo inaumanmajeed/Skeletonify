@@ -1,0 +1,24 @@
+{
+  "name": "@inaumanmajeed/skeletonify-generate",
+  "version": "0.1.0",
+  "description": "Pre-generate skeleton descriptors from JSX. Optional CLI companion for @inaumanmajeed/skeletonify.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "skeletonify-generate": "./src/cli.ts"
+  },
+  "main": "./src/generator.ts",
+  "files": ["src", "README.md"],
+  "keywords": ["skeletonify", "skeleton", "cli", "build-time", "react"],
+  "dependencies": {
+    "@babel/parser": "^7.25.0"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.25.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

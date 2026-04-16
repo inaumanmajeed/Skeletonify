@@ -14,3 +14,10 @@ export interface Descriptor {
   padding?: number;
   children?: Descriptor[];
 }
+
+export const EMPTY_DESCRIPTOR: Descriptor = {
+  type: "box",
+  width: "100%",
+  height: 16,
+  radius: 4,
+};

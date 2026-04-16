@@ -5,6 +5,7 @@ import { SKELETONIFY_MARKER } from "./marker";
 import { getCached, setCached } from "./cache";
 import { inferIdentity } from "./identity";
 import { serializeDOMToDescriptor } from "./serializeDOM";
+import { getBuildDescriptor } from "./build";
 import type { Descriptor } from "./types";
 
 export interface SkeletonifyProps {
@@ -81,10 +82,12 @@ export function Skeletonify({
   if (loading && fallback === undefined) {
     const isNewSession = descriptorRef.current === null || !prevLoadingRef.current;
     if (isNewSession) {
-      // Priority: manual fallback (handled above) > L2 cache > L1 heuristic.
+      // Priority: manual fallback (handled above) > L3 build > L2 cache > L1 heuristic.
+      // L3 is sync, no SSR concern (pre-registered at app init).
       // L2 is only consulted after first hydration to guarantee SSR identity.
+      const buildTime = getBuildDescriptor(componentId);
       const cached = globalHydrated ? getCached(componentId) : null;
-      descriptorRef.current = cached ?? heuristicDescriptor;
+      descriptorRef.current = buildTime ?? cached ?? heuristicDescriptor;
     }
     descriptor = descriptorRef.current;
   } else {

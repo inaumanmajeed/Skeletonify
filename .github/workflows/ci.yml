@@ -27,6 +27,10 @@ jobs:
           cache: npm
 
       - run: npm ci
+
+      - name: Security audit
+        run: npm audit --audit-level=moderate || true
+
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
