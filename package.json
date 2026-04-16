@@ -1,10 +1,10 @@
 {
   "name": "@inaumanmajeed/skeletonify",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Zero-config React skeleton wrapper with L1 heuristic + L2 learning engine. Drop it in, get a plausible loading skeleton for any subtree — SSR-safe, zero flicker.",
+  "description": "Zero-config React skeleton wrapper. L1 heuristic + L2 learning + optional L3 build-time generation. SSR-safe, zero flicker.",
   "license": "MIT",
   "author": "inaumanmajeed",
   "repository": {

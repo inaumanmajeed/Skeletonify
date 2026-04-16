@@ -5,7 +5,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
-import type { Descriptor } from "./types";
+import { EMPTY_DESCRIPTOR, type Descriptor } from "./types";
 import { parseClassName, type ClassInfo } from "./utils/tailwindParser";
 import { SKELETONIFY_MARKER } from "./marker";
 
@@ -173,13 +173,6 @@ const inferElement = (el: ReactElement): Descriptor | null => {
     radius: info.radius ?? 4,
     aspectRatio: info.aspectRatio,
   };
-};
-
-const EMPTY_DESCRIPTOR: Descriptor = {
-  type: "box",
-  width: "100%",
-  height: 16,
-  radius: 4,
 };
 
 export function inferSkeleton(children: ReactNode): Descriptor {

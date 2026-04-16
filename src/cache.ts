@@ -115,12 +115,19 @@ export function clearSkeletonCache(): void {
   if (!hasStorage()) return;
   try {
     const keysToRemove: string[] = [];
-    for (let i = 0; i < window.localStorage.length; i++) {
-      const key = window.localStorage.key(i);
-      if (key && key.startsWith(STORAGE_PREFIX)) keysToRemove.push(key);
+    const len = window.localStorage.length;
+    for (let i = 0; i < len; i++) {
+      try {
+        const key = window.localStorage.key(i);
+        if (key && key.startsWith(STORAGE_PREFIX)) keysToRemove.push(key);
+      } catch {
+        break;
+      }
     }
-    for (const key of keysToRemove) window.localStorage.removeItem(key);
+    for (const key of keysToRemove) {
+      try { window.localStorage.removeItem(key); } catch { /* ignore */ }
+    }
   } catch {
-    // ignore
+    // ignore — storage may be unavailable entirely
   }
 }

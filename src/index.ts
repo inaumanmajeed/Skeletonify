@@ -1,4 +1,12 @@
 export { Skeletonify } from "./Skeletonify";
 export type { SkeletonifyProps } from "./Skeletonify";
+export { EMPTY_DESCRIPTOR } from "./types";
 export type { Descriptor, DescriptorType } from "./types";
 export { clearSkeletonCache, hasCached } from "./cache";
+export { SkeletonRenderer } from "./SkeletonRenderer";
+export {
+  registerBuildDescriptors,
+  getBuildDescriptor,
+  hasBuildDescriptors,
+  clearBuildDescriptors,
+} from "./build";

@@ -1,0 +1,14 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer container -->
+  <rect x="25" y="25" width="170" height="170" rx="28" fill="#0B0B0F" stroke="#2A2A35" stroke-width="2"/>
+
+  <!-- Skeleton bars -->
+  <rect x="55" y="70" width="110" height="14" rx="7" fill="#2F2F3A"/>
+  <rect x="55" y="105" width="80" height="14" rx="7" fill="#2F2F3A"/>
+  <rect x="55" y="140" width="95" height="14" rx="7" fill="#2F2F3A"/>
+
+  <!-- "Smart generation" pulse -->
+  <circle cx="165" cy="70" r="6" fill="#FFFFFF"/>
+  <circle cx="165" cy="70" r="14" fill="white" opacity="0.12"/>
+  <circle cx="165" cy="70" r="22" fill="white" opacity="0.06"/>
+</svg>

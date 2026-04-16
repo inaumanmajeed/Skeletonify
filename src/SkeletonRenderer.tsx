@@ -152,6 +152,8 @@ export function SkeletonRenderer({ descriptor, className }: SkeletonRendererProp
 // Inject a tiny stylesheet once per document. SSR-safe: the <style> tag is
 // rendered as part of the tree, so hydration sees the same output on server
 // and client. Multiple instances deduplicate via the data attribute.
+// SECURITY: dangerouslySetInnerHTML is safe here because STYLES is a
+// compile-time constant with no user input, no interpolation, no dynamic values.
 function StyleOnce(): JSX.Element {
   return (
     <style

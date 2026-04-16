@@ -79,8 +79,10 @@ const serialize = (el: HTMLElement, depth: number): Descriptor | null => {
     };
   }
 
-  // Container: walk children
-  const childEls = Array.from(el.children).slice(0, MAX_CHILDREN) as HTMLElement[];
+  // Container: walk children (filter to actual HTMLElements for type safety)
+  const childEls = Array.from(el.children)
+    .filter((c): c is HTMLElement => c instanceof HTMLElement)
+    .slice(0, MAX_CHILDREN);
   const serializedChildren: Descriptor[] = [];
   for (const child of childEls) {
     const d = serialize(child, depth + 1);
@@ -156,7 +158,9 @@ export function serializeDOMToDescriptor(root: HTMLElement | null): Descriptor |
     return serialize(root, 0);
   }
 
-  const kids = Array.from(root.children).slice(0, MAX_CHILDREN) as HTMLElement[];
+  const kids = Array.from(root.children)
+    .filter((c): c is HTMLElement => c instanceof HTMLElement)
+    .slice(0, MAX_CHILDREN);
   if (kids.length === 0) return null;
   if (kids.length === 1) return serialize(kids[0], 0);
 
