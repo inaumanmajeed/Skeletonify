@@ -232,6 +232,7 @@ export default function App() {
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             v0.3 · L1 heuristic · L2 learning · L3 build-time
           </div>
+          <img src="/favicon.svg" alt="Skeletonify" width="64" height="64" className="animate-[fadeUp_0.6s_ease-out]" />
           <h1 className="text-6xl md:text-8xl font-bold tracking-tight bg-gradient-to-br from-white via-white to-white/40 bg-clip-text text-transparent animate-[fadeUp_0.8s_ease-out]">
             Skeletonify
           </h1>

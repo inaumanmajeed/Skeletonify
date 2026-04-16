@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/logo.svg" alt="Skeletonify" width="80" height="80" />
+
 <h1>Skeletonify</h1>
 
 <h3>React skeletons that generate themselves.</h3>
